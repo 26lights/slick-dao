@@ -15,16 +15,17 @@ trait PersonComponent extends BaseDaoComponent {
 
   import profile.simple._
 
+  class Persons(tag: Tag) extends profile.simple.Table[Person](tag, "person") with IdentifiableTable[Int] {
+    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
+        def firstName = column[String]("first_name")
+        def lastName = column[String]("last_name")
+        def * = (firstName, lastName, id.?) <> (Person.tupled, Person.unapply)
+  }
+
   object PersonDao extends SlickJdbcDao[Person, Int] {
 
     def query = TableQuery[Persons]
 
-    class Persons(tag: Tag) extends profile.simple.Table[Person](tag, "person") with IdentifiableTable[Int] {
-      def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-      def firstName = column[String]("first_name")
-      def lastName = column[String]("last_name")
-      def * = (firstName, lastName, id.?) <> (Person.tupled, Person.unapply)
-    }
 
 
     def extractId(row: Person): Option[Int] =
