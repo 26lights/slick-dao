@@ -52,6 +52,9 @@ trait BaseDaoComponent {
     def findById(id: I)(implicit session: Session): R =
       findOptionById(id).get
 
+    def list(implicit session: Session): List[R] = query.list
+    def iterator(implicit session: Session): Iterator[R] = query.iterator
+
 
     def pages(pageIndex: Int, limit: Int)(implicit session: Session): Seq[R] =
       query.drop(pageIndex).take(limit).run.toList
