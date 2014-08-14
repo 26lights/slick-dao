@@ -21,8 +21,8 @@ object SlickDaoBuild extends Build {
   )
   
   val BuildSettings = Project.defaultSettings ++ Seq(
-    scalaVersion := "2.10.3",
     scalacOptions := scalaBuildOptions,
+    scalaVersion := "2.11.2",
     resolvers ++= repos,
     version := appVersion+"-"+git.gitHeadCommit.value.map{_.take(7)}.getOrElse("SNAPSHOT"),
     publishTo := {
@@ -35,12 +35,12 @@ object SlickDaoBuild extends Build {
   )
 
   val mainDependencies = Seq(
-    "com.typesafe.slick"    %%  "slick"                   % "2.0.0",
-    "org.scalautils"        %%  "scalautils"              % "2.0",
+    "com.typesafe.slick"    %%  "slick"                   % "2.1.0",
+    "org.scalautils"        %%  "scalautils"              % "2.1.5",
     "org.slf4j"             %   "slf4j-api"               % "1.7.7",
     "com.h2database"        %   "h2"                      % "1.3.166",
 
-    "org.scalatest"         %%  "scalatest"               % "2.0"         % "test"
+    "org.scalatest"         %%  "scalatest"               % "2.2.1"      % "test"
   )
 
   lazy val root = Project(

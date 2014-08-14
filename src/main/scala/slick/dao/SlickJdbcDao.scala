@@ -57,7 +57,7 @@ trait SlickJdbcDao[M, I] extends SlickDao[M, I] {
    * @param id
    * @return
    */
-  def queryById(id: I): Query[Table[M], M]
+  def queryById(id: I): Query[Table[M], M, Seq]
 
   def count: Int = query.length.run
 
